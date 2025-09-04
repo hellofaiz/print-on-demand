@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -70,13 +70,13 @@ export default function ProfilePage() {
     }
   }, [getWishlistCount, mounted])
 
-  const fetchUserStats = async () => {
+  const fetchUserStats = useCallback(async () => {
     try {
       const response = await fetch('/api/orders')
       if (response.ok) {
         const data = await response.json()
         const wishlistCount = getWishlistCount()
-        const memberSince = session?.user?.createdAt 
+        const memberSince = session?.user?.createdAt
           ? new Date(session.user.createdAt).getFullYear()
           : new Date().getFullYear()
 
@@ -89,7 +89,7 @@ export default function ProfilePage() {
     } catch (error) {
       console.error('Error fetching user stats:', error)
     }
-  }
+  }, [getWishlistCount, session, setStats])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target

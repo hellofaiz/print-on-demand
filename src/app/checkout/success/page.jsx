@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CheckCircle, Package, ArrowRight, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [mounted, setMounted] = useState(false)
@@ -111,5 +111,17 @@ export default function CheckoutSuccessPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function CheckoutSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      </div>
+    }>
+      <CheckoutSuccessContent />
+    </Suspense>
   )
 } 

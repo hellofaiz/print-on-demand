@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -245,12 +245,12 @@ const SORT_OPTIONS = [
   { value: 'popular', label: 'Most Popular' }
 ]
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { addItem: addToCart } = useCartWithHydration()
   const { addItem: addToWishlist, isInWishlist } = useWishlistWithHydration()
-  
+
   const [products, setProducts] = useState(DUMMY_PRODUCTS)
   const [filteredProducts, setFilteredProducts] = useState(DUMMY_PRODUCTS)
   const [loading, setLoading] = useState(false)
@@ -258,7 +258,7 @@ export default function ProductsPage() {
   const [showFilters, setShowFilters] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [showModal, setShowModal] = useState(false)
-  
+
   // Filter states
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All')
@@ -766,5 +766,17 @@ export default function ProductsPage() {
         onAddToWishlist={handleModalAddToWishlist}
       />
     </div>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      </div>
+    }>
+      <ProductsPageContent />
+    </Suspense>
   )
 } 
