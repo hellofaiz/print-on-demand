@@ -269,6 +269,9 @@ function ProductsPageContent() {
   const [onlyInStock, setOnlyInStock] = useState(false)
   const [onlyFeatured, setOnlyFeatured] = useState(false)
 
+  // Check for product parameter to auto-open modal
+  const productParam = searchParams.get('product')
+
   // Get unique colors and sizes
   const allColors = [...new Set(products.flatMap(p => p.colors))]
   const allSizes = [...new Set(products.flatMap(p => p.sizes))]
@@ -348,13 +351,28 @@ function ProductsPageContent() {
     filterProducts()
   }, [filterProducts])
 
+  // Auto-open modal for product from URL parameter
+  useEffect(() => {
+    if (productParam && products.length > 0) {
+      const productToShow = products.find(p => p.id === productParam)
+      if (productToShow) {
+        setSelectedProduct(productToShow)
+        setShowModal(true)
+        // Clean up URL parameter after opening modal
+        const url = new URL(window.location)
+        url.searchParams.delete('product')
+        window.history.replaceState({}, '', url)
+      }
+    }
+  }, [productParam, products])
+
   // Update URL params
   useEffect(() => {
     const params = new URLSearchParams()
     if (searchQuery) params.set('search', searchQuery)
     if (selectedCategory !== 'All') params.set('category', selectedCategory)
     if (sortBy !== 'featured') params.set('sort', sortBy)
-    
+
     const newUrl = `${window.location.pathname}?${params.toString()}`
     window.history.replaceState({}, '', newUrl)
   }, [searchQuery, selectedCategory, sortBy])
@@ -406,7 +424,10 @@ function ProductsPageContent() {
   }
 
   const ProductCard = ({ product }) => (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
+    <Card
+      className="group overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer"
+      onClick={() => handleAddToCart(product)}
+    >
       <div className="relative aspect-square overflow-hidden">
         <Image
           src={product.images?.[0] || '/placeholder-image-white.png'}
@@ -421,20 +442,26 @@ function ProductsPageContent() {
           </div>
         )}
         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button 
-            size="icon" 
-            variant="secondary" 
+          <Button
+            size="icon"
+            variant="secondary"
             className="h-8 w-8"
-            onClick={() => handleAddToWishlist(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAddToWishlist(product);
+            }}
           >
             <Heart className={`h-4 w-4 ${isInWishlist(product.id, product.sizes[0], product.colors[0]) ? 'fill-red-500 text-red-500' : ''}`} />
           </Button>
         </div>
         <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button 
-            size="icon" 
+          <Button
+            size="icon"
             className="h-8 w-8"
-            onClick={() => handleAddToCart(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAddToCart(product);
+            }}
           >
             <ShoppingCart className="h-4 w-4" />
           </Button>

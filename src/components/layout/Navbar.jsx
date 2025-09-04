@@ -11,6 +11,7 @@ import { useCartWithHydration } from '@/components/providers/CartProvider'
 import { useWishlistWithHydration } from '@/components/providers/WishlistProvider'
 import { useAuthStatus } from '@/components/providers/AuthProvider'
 import CartDrawer from '@/components/cart/CartDrawer'
+import logo from '../../../public/logo.png'
 
 export default function Navbar() {
   const router = useRouter()
@@ -83,8 +84,8 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-800 transition-colors">
-                POD Store
+              <Link href="/">
+                <Image src="/logo.png" alt="Logo" width={80} height={40} />
               </Link>
             </div>
 

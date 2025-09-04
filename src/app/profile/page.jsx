@@ -45,6 +45,27 @@ export default function ProfilePage() {
       })
     }
   }, [session])
+  const fetchUserStats = useCallback(async () => {
+    try {
+      const response = await fetch('/api/orders')
+      if (response.ok) {
+        const data = await response.json()
+        const wishlistCount = getWishlistCount()
+        const memberSince = session?.user?.createdAt
+          ? new Date(session.user.createdAt).getFullYear()
+          : new Date().getFullYear()
+
+        setStats({
+          totalOrders: data.orders?.length || 0,
+          wishlistItems: wishlistCount,
+          memberSince
+        })
+      }
+    } catch (error) {
+      console.error('Error fetching user stats:', error)
+    }
+  }, [getWishlistCount, session, setStats])
+
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -70,26 +91,6 @@ export default function ProfilePage() {
     }
   }, [getWishlistCount, mounted])
 
-  const fetchUserStats = useCallback(async () => {
-    try {
-      const response = await fetch('/api/orders')
-      if (response.ok) {
-        const data = await response.json()
-        const wishlistCount = getWishlistCount()
-        const memberSince = session?.user?.createdAt
-          ? new Date(session.user.createdAt).getFullYear()
-          : new Date().getFullYear()
-
-        setStats({
-          totalOrders: data.orders?.length || 0,
-          wishlistItems: wishlistCount,
-          memberSince
-        })
-      }
-    } catch (error) {
-      console.error('Error fetching user stats:', error)
-    }
-  }, [getWishlistCount, session, setStats])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target

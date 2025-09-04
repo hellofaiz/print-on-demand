@@ -42,7 +42,7 @@ function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       {/* Newsletter Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-12">
+      {/* <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-12">
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-2xl font-bold mb-4">Stay Updated with Luixen</h3>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
@@ -67,7 +67,7 @@ function Footer() {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-16">
