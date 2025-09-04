@@ -227,24 +227,36 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section id="products" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Products</h2>
-            <p className="text-xl text-gray-600">Discover our most popular designs</p>
+      <section id="products" className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full opacity-20 -translate-x-16 -translate-y-16"></div>
+        <div className="absolute top-20 right-0 w-24 h-24 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full opacity-20 translate-x-12"></div>
+
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-6">
+              <Shirt className="h-8 w-8 text-white" />
+            </div>
+            <h2 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              Featured Products
+            </h2>
+            <p className="text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Discover our most popular designs crafted with premium quality and creativity
+            </p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
+              <div key={product.id} className="bg-white rounded-3xl shadow-lg overflow-hidden group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100">
                 <div className="relative">
-                  <div className="relative w-full h-64">
+                  <div className="relative w-full h-64 overflow-hidden">
                     <Image
-                      src={product.images?.[0] || '/placeholder-image-white.png'}
+                      src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   {product.badge && (
                     <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${
@@ -256,32 +268,38 @@ export default function HomePage() {
                       {product.badge}
                     </span>
                   )}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-50">
-                      <Heart className="h-5 w-5 text-gray-600" />
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <button className="bg-white p-3 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-pink-500 hover:to-red-500 hover:text-white hover:scale-110 transition-all duration-300">
+                      <Heart className="h-5 w-5 text-gray-600 group-hover:text-white" />
                     </button>
                   </div>
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <button className="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/products?product=${product.id}`);
+                      }}
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 hover:scale-105 shadow-lg"
+                    >
                       Quick View
                     </button>
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
-                  
-                  <div className="flex items-center mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{product.name}</h3>
+
+                  <div className="flex items-center mb-3 transform group-hover:scale-105 transition-transform duration-300">
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} />
+                        <Star key={i} className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''} transition-all duration-300`} />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-600 ml-2">({product.reviews})</span>
+                    <span className="text-sm text-gray-600 ml-2 transition-colors duration-300">({product.reviews})</span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between mb-4">
-                    <div>
+                    <div className="transform group-hover:scale-105 transition-transform duration-300">
                       <span className="text-2xl font-bold text-gray-900">${product.price}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-500 line-through ml-2">${product.originalPrice}</span>
@@ -306,9 +324,9 @@ export default function HomePage() {
                         ></div>
                       ))}
                     </div>
-                    <button 
+                    <button
                       onClick={() => router.push("/products")}
-                      className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-300"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white p-3 rounded-full hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg"
                       title="View Product"
                     >
                       <ShoppingBag className="h-4 w-4" />
@@ -320,9 +338,9 @@ export default function HomePage() {
           </div>
           
           <div className="text-center mt-12">
-            <button 
+            <button
               onClick={() => router.push("/custom-tshirt-editor")}
-              className="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-300"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               View All Products
             </button>
