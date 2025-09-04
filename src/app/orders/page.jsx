@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { 
@@ -173,7 +174,7 @@ export default function OrdersPage() {
               No orders yet
             </h2>
             <p className="text-gray-600 mb-8 text-center max-w-md">
-              You haven't placed any orders yet. Start shopping to see your orders here.
+              You haven&apos;t placed any orders yet. Start shopping to see your orders here.
             </p>
             <Button onClick={() => router.push('/products')}>
               Start Shopping
@@ -352,9 +353,11 @@ export default function OrdersPage() {
                         <div key={index} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                           <div className="w-12 h-12 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden">
                             {item.product?.images?.[0] ? (
-                              <img
+                              <Image
                                 src={item.product.images[0]}
                                 alt={item.product.name}
+                                width={48}
+                                height={48}
                                 className="w-full h-full object-cover"
                               />
                             ) : (

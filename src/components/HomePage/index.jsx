@@ -337,8 +337,8 @@ export default function HomePage() {
             <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
               <p className="text-lg text-gray-600 mb-6">
-                At Luixen, we believe that fashion is more than just clothing—it's a powerful form of self-expression. 
-                Founded with a passion for quality and creativity, we've made it our mission to help you tell your unique story through custom apparel.
+                At Luixen, we believe that fashion is more than just clothing—it&apos;s a powerful form of self-expression. 
+                Founded with a passion for quality and creativity, we&apos;ve made it our mission to help you tell your unique story through custom apparel.
               </p>
               <p className="text-lg text-gray-600 mb-8">
                 Every piece we create is crafted with premium materials and attention to detail, ensuring that your vision comes to life exactly as you imagined it.
@@ -405,7 +405,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <blockquote className="text-xl md:text-2xl text-gray-700 mb-6 italic">
-                  "{testimonials[currentTestimonial].comment}"
+                  &quot;{testimonials[currentTestimonial].comment}&quot;
                 </blockquote>
                 <div className="font-semibold text-gray-900 text-lg">
                   {testimonials[currentTestimonial].name}

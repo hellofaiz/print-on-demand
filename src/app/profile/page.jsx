@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { User, Mail, Phone, MapPin, Calendar, Edit2, Save, X, ArrowLeft } from 'lucide-react'
@@ -57,7 +58,7 @@ export default function ProfilePage() {
     if (session?.user && mounted) {
       fetchUserStats()
     }
-  }, [session, mounted])
+  }, [session, mounted, fetchUserStats])
 
   // Update wishlist count when it changes
   useEffect(() => {
@@ -226,9 +227,11 @@ export default function ProfilePage() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   {formData.image ? (
-                    <img
+                    <Image
                       src={formData.image}
                       alt="Profile"
+                      width={80}
+                      height={80}
                       className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg"
                     />
                   ) : (

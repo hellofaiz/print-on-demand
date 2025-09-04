@@ -148,10 +148,10 @@ export default function About() {
                 Luixen was born from a simple belief: everyone deserves to wear their story. In 2019, we started as a small studio in Gujarat, India, with a mission to make custom apparel accessible, affordable, and absolutely amazing.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                What began as a passion project has grown into a thriving community of creators, designers, and dreamers. We've helped thousands of customers express their unique personalities through custom t-shirts, hoodies, and more.
+                What began as a passion project has grown into a thriving community of creators, designers, and dreamers. We&apos;ve helped thousands of customers express their unique personalities through custom t-shirts, hoodies, and more.
               </p>
               <p className="text-lg text-gray-600 mb-8">
-                Today, we're proud to be at the forefront of the custom apparel revolution, combining cutting-edge technology with traditional craftsmanship to deliver products that exceed expectations.
+                Today, we&apos;re proud to be at the forefront of the custom apparel revolution, combining cutting-edge technology with traditional craftsmanship to deliver products that exceed expectations.
               </p>
               
               <div className="flex flex-wrap gap-4">
@@ -219,7 +219,7 @@ export default function About() {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
               <p className="text-gray-600">
-                To become the world's leading platform for creative expression through custom apparel, inspiring millions to wear their stories.
+                To become the world&apos;s leading platform for creative expression through custom apparel, inspiring millions to wear their stories.
               </p>
             </div>
             
@@ -343,7 +343,7 @@ export default function About() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Easy Returns</h3>
               <p className="text-gray-600">
-                Not satisfied? Our hassle-free return policy ensures you're always happy with your purchase.
+                Not satisfied? Our hassle-free return policy ensures you&apos;re always happy with your purchase.
               </p>
             </div>
           </div>

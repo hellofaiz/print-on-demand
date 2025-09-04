@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { X, ShoppingCart, Heart } from 'lucide-react'
 import { Button } from './button'
 import { formatPrice } from '@/lib/utils'
@@ -63,9 +64,11 @@ export default function ProductSelectionModal({
           {/* Product Info */}
           <div className="flex flex-col md:flex-row gap-6 mb-6">
             <div className="flex-shrink-0">
-              <img
+              <Image
                 src={product.images?.[0] || '/placeholder-image-white.png'}
                 alt={product.name}
+                width={192}
+                height={192}
                 className="w-full md:w-48 h-48 object-cover rounded-lg"
               />
             </div>

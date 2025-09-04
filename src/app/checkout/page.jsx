@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { 
@@ -733,9 +734,11 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <div key={`${item.id}-${item.size}-${item.color}`} className="flex items-center gap-3">
                     <div className="w-16 h-16 bg-gray-200 rounded-md overflow-hidden flex-shrink-0">
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
+                        width={64}
+                        height={64}
                         className="w-full h-full object-cover"
                       />
                     </div>

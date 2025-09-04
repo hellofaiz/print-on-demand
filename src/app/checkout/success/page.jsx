@@ -64,20 +64,20 @@ export default function CheckoutSuccessPage() {
           <div className="bg-blue-50 p-4 rounded-lg mb-6 text-left">
             <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
               <Package className="h-4 w-4" />
-              What's Next?
+              What&apos;s Next?
             </h3>
             <ul className="space-y-2 text-sm text-blue-800">
               <li className="flex items-start gap-2">
                 <ArrowRight className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                You'll receive an order confirmation email shortly
+                You&apos;ll receive an order confirmation email shortly
               </li>
               <li className="flex items-start gap-2">
                 <ArrowRight className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                We'll notify you when your order ships
+                We&apos;ll notify you when your order ships
               </li>
               <li className="flex items-start gap-2">
                 <ArrowRight className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                Track your order in the "My Orders" section
+                Track your order in the &quot;My Orders&quot; section
               </li>
             </ul>
           </div>

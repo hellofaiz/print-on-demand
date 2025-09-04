@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { ShoppingCart, Heart, User, Menu, X, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useCartWithHydration } from '@/components/providers/CartProvider'
@@ -159,9 +160,11 @@ export default function Navbar() {
                     <div className="relative group">
                       <Button variant="ghost" size="icon" className="rounded-full">
                         {session?.user?.image ? (
-                          <img
+                          <Image
                             src={session.user.image}
                             alt={session.user.name || 'User'}
+                            width={32}
+                            height={32}
                             className="w-8 h-8 rounded-full"
                           />
                         ) : (
@@ -343,9 +346,11 @@ export default function Navbar() {
                   <div className="space-y-2">
                     <div className="flex items-center px-3 py-2 text-sm text-gray-700">
                       {session?.user?.image ? (
-                        <img
+                        <Image
                           src={session.user.image}
                           alt={session.user.name || 'User'}
+                          width={32}
+                          height={32}
                           className="w-8 h-8 rounded-full mr-3"
                         />
                       ) : (

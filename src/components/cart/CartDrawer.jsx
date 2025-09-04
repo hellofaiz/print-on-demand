@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -71,9 +72,11 @@ export default function CartDrawer() {
                 {items.map((item) => (
                   <div key={`${item.id}-${item.size}-${item.color}`} className="flex items-center space-x-4 border-b pb-4">
                     <div className="flex-shrink-0">
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
+                        width={64}
+                        height={64}
                         className="w-16 h-16 object-cover rounded-md"
                       />
                     </div>
